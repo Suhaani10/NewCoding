@@ -1,0 +1,38 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int[] cards = new int[n];
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            cards[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int left = 0, right = n - 1;
+        int sereja = 0, dima = 0;
+        boolean turn = true;  // true = Sereja's turn, false = Dima's turn
+
+        while (left <= right) {
+            int chosen;
+            if (cards[left] > cards[right]) {
+                chosen = cards[left++];
+            } else {
+                chosen = cards[right--];
+            }
+
+            if (turn) {
+                sereja += chosen;
+            } else {
+                dima += chosen;
+            }
+
+            turn = !turn; // switch turns
+        }
+
+        System.out.println(sereja + " " + dima);
+    }
+}
